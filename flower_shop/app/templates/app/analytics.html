@@ -1,0 +1,48 @@
+{% extends "app/base.html" %}
+
+{% block title %}
+Аналитика
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center">Аналитика по заказам</h1>
+
+    <div class="card mt-4">
+        <div class="card-header bg-primary text-white">
+            <h4>Общая статистика</h4>
+        </div>
+        <div class="card-body">
+            <p><strong>Всего заказов:</strong> {{ total_orders }}</p>
+            <p><strong>Общая выручка:</strong> {{ total_revenue }} ₽</p>
+        </div>
+    </div>
+
+    <div class="card mt-4">
+        <div class="card-header bg-secondary text-white">
+            <h4>Статистика за сегодня</h4>
+        </div>
+        <div class="card-body">
+            <p><strong>Заказов сегодня:</strong> {{ total_orders_today }}</p>
+            <p><strong>Выручка за сегодня:</strong> {{ total_revenue_today }} ₽</p>
+        </div>
+    </div>
+
+    <div class="card mt-4">
+        <div class="card-header bg-dark text-white">
+            <h4>Заказы за сегодня</h4>
+        </div>
+        <ul class="list-group list-group-flush">
+            {% for order in orders_today %}
+                <li class="list-group-item">
+                    <p><strong>Заказ #{{ order.id }}</strong> от {{ order.created_at|date:"d.m.Y H:i" }}</p>
+                    <p><strong>Сумма:</strong> {{ order.total_price }} ₽</p>
+                    <p><strong>Статус:</strong> {{ order.get_status_display }}</p>
+                </li>
+            {% empty %}
+                <li class="list-group-item text-center">Сегодня заказов нет.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

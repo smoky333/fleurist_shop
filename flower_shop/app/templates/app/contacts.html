@@ -1,0 +1,61 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block title %}
+Контакты
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Свяжитесь с нами</h1>
+
+    <!-- Карта и контактная информация -->
+    <div class="row mb-5">
+        <div class="col-md-6">
+            <h3>Наш адрес</h3>
+            <p><strong>Flower Delivery</strong></p>
+            <p>11 rue de la paix</p>
+            <p>75001 Paris, France</p>
+            <p><strong>Телефон:</strong> +33 1 23 45 67</p>
+            <p><strong>Email:</strong> support@flowerdelivery.fr</p>
+            <p><strong>Часы работы:</strong> Пн-Пт 9:00 - 18:00</p>
+        </div>
+        <div class="col-md-6">
+            <h3>Наше местоположение</h3>
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2244.8943848723135!2d37.61729931581154!3d55.75582698055251!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x414abcced!2z0JHQtdC50YHQutC40Lkg0LrRgNCw0LzQvdC-LdCk0LPQkNCh0LzQsNC80LXQvdC40Lkg0LrQvtCz0LAg0KHRgdC80LzQvtGA0LjRhtC90L7QstC70YzQvdGL0Lk!5e0!3m2!1sru!2sru!4v1234567890123"
+                    width="100%"
+                    height="300"
+                    style="border:0;"
+                    allowfullscreen=""
+                    loading="lazy">
+                </iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Форма обратной связи -->
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h3 class="text-center mb-4">Напишите нам</h3>
+            <form action="/send-message/" method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="name" class="form-label">Ваше имя</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Введите ваше имя" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Ваш email</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Введите ваш email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="message" class="form-label">Сообщение</label>
+                    <textarea class="form-control" id="message" name="message" rows="5" placeholder="Введите ваше сообщение" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Отправить</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

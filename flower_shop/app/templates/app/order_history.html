@@ -1,0 +1,27 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block title %}История заказов{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">История заказов</h2>
+    {% if orders %}
+        <div class="list-group">
+            {% for order in orders %}
+                <div class="list-group-item">
+                    <h5>Заказ №{{ order.id }} от {{ order.created_at|date:"d.m.Y H:i" }}</h5>
+                    <p>Сумма: {{ order.total_price }} ₽</p>
+                    <p>Статус: {{ order.status }}</p>
+                    <!-- Кнопка для повторного оформления заказа -->
+                    <a href="{% url 'shop:repeat_order' order.id %}" class="btn btn-primary">
+                        Повторить заказ
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>У вас пока нет заказов.</p>
+    {% endif %}
+</div>
+{% endblock %}

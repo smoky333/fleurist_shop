@@ -1,0 +1,15 @@
+<!-- app/templates/app/home.html -->
+
+{% extends "app/base.html" %}
+
+{% block title %}Главная{% endblock %}
+
+{% block content %}
+<div class="jumbotron bg-light p-5 rounded">
+    <h1 class="display-4">Добро пожаловать в Flower Delivery!</h1>
+    <p class="lead">Мы доставляем самые красивые и свежие цветы прямо к вашему порогу.</p>
+    <hr class="my-4">
+    <p>Ознакомьтесь с нашим каталогом и выберите идеальный букет для любого случая!</p>
+    <a class="btn btn-primary btn-lg" href="{% url 'app:catalog' %}" role="button">Перейти в каталог</a>
+</div>
+{% endblock %}

@@ -1,0 +1,72 @@
+<!-- shop/templates/shop/add_product.html -->
+
+{% extends "app/base.html" %}
+
+{% block title %}Добавить Товар{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Добавить Новый Товар</h2>
+    <form method="post" enctype="multipart/form-data" novalidate>
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <div class="mb-3">
+            {{ form.category.label_tag }}
+            {{ form.category }}
+            {% for error in form.category.errors %}
+                <div class="alert alert-danger mt-1">{{ error }}</div>
+            {% endfor %}
+        </div>
+        <div class="mb-3">
+            {{ form.name.label_tag }}
+            {{ form.name }}
+            {% for error in form.name.errors %}
+                <div class="alert alert-danger mt-1">{{ error }}</div>
+            {% endfor %}
+        </div>
+        <div class="mb-3">
+            {{ form.slug.label_tag }}
+            {{ form.slug }}
+            {% for error in form.slug.errors %}
+                <div class="alert alert-danger mt-1">{{ error }}</div>
+            {% endfor %}
+        </div>
+        <div class="mb-3">
+            {{ form.description.label_tag }}
+            {{ form.description }}
+            {% for error in form.description.errors %}
+                <div class="alert alert-danger mt-1">{{ error }}</div>
+            {% endfor %}
+        </div>
+        <div class="mb-3">
+            {{ form.price.label_tag }}
+            {{ form.price }}
+            {% for error in form.price.errors %}
+                <div class="alert alert-danger mt-1">{{ error }}</div>
+            {% endfor %}
+        </div>
+        <div class="mb-3">
+            {{ form.image.label_tag }}
+            {{ form.image }}
+            {% for error in form.image.errors %}
+                <div class="alert alert-danger mt-1">{{ error }}</div>
+            {% endfor %}
+        </div>
+        <div class="mb-3">
+            {{ form.stock.label_tag }}
+            {{ form.stock }}
+            {% for error in form.stock.errors %}
+                <div class="alert alert-danger mt-1">{{ error }}</div>
+            {% endfor %}
+        </div>
+        <div class="form-check mb-3">
+            {{ form.available }}
+            {{ form.available.label_tag }}
+            {% for error in form.available.errors %}
+                <div class="alert alert-danger mt-1">{{ error }}</div>
+            {% endfor %}
+        </div>
+        <button type="submit" class="btn btn-primary">Добавить Товар</button>
+    </form>
+</div>
+{% endblock %}

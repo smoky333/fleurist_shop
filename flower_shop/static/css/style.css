@@ -1,0 +1,50 @@
+/* Общие стили */
+body {
+    background-color: #f8f9fa; /* светло-серый фон */
+    font-family: Arial, sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Стили для навигационной панели (при необходимости можно переопределить стандартные стили Bootstrap) */
+.navbar {
+    margin-bottom: 20px;
+}
+
+/* Стили для карусели */
+.carousel-item img {
+    width: 100%;           /* изображение занимает всю ширину контейнера */
+    height: 300px;         /* фиксированная высота для карусели – можно изменить по необходимости */
+    object-fit: cover;     /* изображение масштабируется и обрезается по необходимости, чтобы заполнить контейнер */
+}
+
+/* Дополнительное оформление для карусели */
+.carousel-caption {
+    background-color: rgba(0, 0, 0, 0.5);  /* полупрозрачный черный фон для читаемости текста */
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Стили для футера */
+footer {
+    background-color: #343a40;    /* темный фон */
+    color: #fff;                  /* белый текст */
+    text-align: center;
+    padding: 20px 0;
+    font-size: 0.9rem;
+    margin-top: 40px;
+}
+
+/* Стили для форм и кнопок (если требуется дополнительное оформление) */
+form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.btn {
+    /* можно задать общие стили для кнопок, если нужно */
+    border-radius: 4px;
+}

@@ -1,0 +1,68 @@
+
+{% extends "app/base.html" %}
+
+{% block title %}
+Оформление Заказа
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Оформление Заказа</h2>
+    <form method="post" novalidate>
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+
+        <!-- Телефон -->
+        <div class="mb-3">
+            {{ form.phone_number.label_tag }}
+            {{ form.phone_number }}
+            {% for error in form.phone_number.errors %}
+                <div class="alert alert-danger mt-1">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <!-- Адрес доставки -->
+        <div class="mb-3">
+            {{ form.delivery_address.label_tag }}
+            {{ form.delivery_address }}
+            {% for error in form.delivery_address.errors %}
+                <div class="alert alert-danger mt-1">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <!-- Дата доставки -->
+        <div class="mb-3">
+            {{ form.delivery_date.label_tag }}
+            {{ form.delivery_date }}
+            {% for error in form.delivery_date.errors %}
+                <div class="alert alert-danger mt-1">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <!-- Время доставки -->
+        <div class="mb-3">
+            {{ form.delivery_time.label_tag }}
+            {{ form.delivery_time }}
+            {% for error in form.delivery_time.errors %}
+                <div class="alert alert-danger mt-1">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <h4>Ваши товары:</h4>
+        <ul class="list-group mb-3">
+            {% for item in cart_items %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ item.product.name }} x{{ item.quantity }}
+                    <span>{{ item.subtotal }} ₽</span>
+                </li>
+            {% endfor %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <strong>Общая сумма:</strong>
+                <strong>{{ total_price }} ₽</strong>
+            </li>
+        </ul>
+
+        <button type="submit" class="btn btn-success">Оформить Заказ</button>
+    </form>
+</div>
+{% endblock %}

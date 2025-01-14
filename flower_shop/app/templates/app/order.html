@@ -1,0 +1,54 @@
+{% extends 'app/base.html' %}
+
+{% block title %}
+Оформление заказа
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center">Оформление заказа</h1>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <form method="post">
+                {% csrf_token %}
+                <!-- Выбор букета -->
+                <div class="form-group mb-3">
+                    <label for="bouquet">Выберите букет</label>
+                    <select class="form-select" id="bouquet" name="bouquet" required>
+                        <option value="" disabled selected>Выберите...</option>
+                        <!-- Пример опций -->
+                        <option value="1">Розы — 1500 руб.</option>
+                        <option value="2">Тюльпаны — 1200 руб.</option>
+                        <option value="3">Лилии — 1800 руб.</option>
+                    </select>
+                </div>
+
+                <!-- Контактные данные -->
+                <div class="form-group mb-3">
+                    <label for="name">Ваше имя</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Введите ваше имя" required>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="phone">Номер телефона</label>
+                    <input type="tel" class="form-control" id="phone" name="phone" placeholder="Введите номер телефона" required>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Введите email" required>
+                </div>
+
+                <!-- Адрес доставки -->
+                <div class="form-group mb-3">
+                    <label for="address">Адрес доставки</label>
+                    <textarea class="form-control" id="address" name="address" rows="3" placeholder="Введите адрес доставки" required></textarea>
+                </div>
+
+                <!-- Кнопка отправки -->
+                <button type="submit" class="btn btn-primary w-100">Оформить заказ</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,37 @@
+
+
+{% extends "app/base.html" %}
+
+{% block title %}Вход{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Вход</h2>
+    <form method="post" novalidate>
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <div class="mb-3">
+            {{ form.username.label_tag }}
+            {{ form.username }}
+            {% for error in form.username.errors %}
+                <div class="alert alert-danger mt-1">{{ error }}</div>
+            {% endfor %}
+        </div>
+        <div class="mb-3">
+            {{ form.password.label_tag }}
+            {{ form.password }}
+            {% for error in form.password.errors %}
+                <div class="alert alert-danger mt-1">{{ error }}</div>
+            {% endfor %}
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Войти</button>
+    </form>
+    <p class="text-center mt-3">
+        Забыли пароль? <a href="{% url 'shop:password_reset' %}">Сбросить пароль</a>.
+    </p>
+    <p class="text-center mt-3">
+        Нет аккаунта? <a href="{% url 'shop:register' %}">Зарегистрируйтесь здесь</a>.
+    </p>
+</div>
+{% endblock %}
+

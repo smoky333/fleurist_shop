@@ -1,0 +1,14 @@
+
+{% extends "app/base.html" %}
+
+{% block title %}Выход из системы{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">Вы успешно вышли из системы.</h2>
+    <p class="text-center">
+        <a href="{% url 'shop:login' %}">Войти снова</a>
+    </p>
+</div>
+{% endblock %}
+
