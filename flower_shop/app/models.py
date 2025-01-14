@@ -8,6 +8,7 @@ class Product(models.Model):
     available = models.BooleanField(default=True)
     stock = models.PositiveIntegerField(default=0)
     image = models.ImageField(upload_to='products/', blank=True, null=True)
+    description = models.TextField(blank=True)
 
     def is_in_stock(self):
         return self.stock > 0
@@ -26,6 +27,7 @@ class CartItem(models.Model):
 
     def subtotal(self):
         return self.price * self.quantity
+
 
 
 class Order(models.Model):

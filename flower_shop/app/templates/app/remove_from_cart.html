@@ -1,0 +1,53 @@
+<!-- app/templates/app/remove_from_cart.html -->
+
+{% extends "app/base.html" %}
+
+{% block title %}Удалить товар из корзины{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Корзина</h2>
+
+    {% if cart_items %}
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Товар</th>
+                        <th>Цена за единицу (€)</th>
+                        <th>Количество</th>
+                        <th>Итоговая цена (€)</th>
+                        <th>Действие</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cart_items %}
+                        <tr>
+                            <td>{{ item.product.name }}</td>
+                            <td>{{ item.price }}</td>
+                            <td>{{ item.quantity }}</td>
+                            <td>{{ item.subtotal }}</td>
+                            <td>
+                                <form method="post" action="{% url 'app:remove_from_cart' item.id %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger btn-sm">Удалить</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <h4>Общая сумма: {{ total_price }} €</h4>
+            <a href="{% url 'app:checkout' %}" class="btn btn-success">Оформить заказ</a>
+        </div>
+    {% else %}
+        <p class="text-center">Ваша корзина пуста.</p>
+        <div class="text-center mt-4">
+            <a href="{% url 'app:catalog' %}" class="btn btn-primary">Вернуться в каталог</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

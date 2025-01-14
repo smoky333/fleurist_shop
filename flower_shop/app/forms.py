@@ -28,9 +28,15 @@ class RegistrationForm(forms.ModelForm):
 
 
 class OrderForm(forms.ModelForm):
+    delivery_date = forms.DateField(
+        widget=forms.DateInput(attrs={'type': 'date'}),
+        input_formats=['%Y-%m-%d'],
+        required=True
+    )
+
     class Meta:
         model = Order
-        fields = ['delivery_address', 'phone_number', 'delivery_time', 'delivery_date']  # пример полей
+        fields = ['delivery_address', 'phone_number', 'delivery_time', 'delivery_date']
 
 
 class ReviewForm(forms.ModelForm):

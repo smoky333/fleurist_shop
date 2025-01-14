@@ -16,7 +16,7 @@
     <!-- Навигационная панель -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{% url 'shop:home' %}">Flower Shop</a>
+            <a class="navbar-brand" href="{% url 'app:home' %}">Flower Shop</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Переключить навигацию">
                 <span class="navbar-toggler-icon"></span>
@@ -115,7 +115,7 @@
     <footer class="text-center text-white bg-dark mt-4">
         <div class="container py-3">
             <p>&copy; 2025 Flower Shop. Все права защищены.</p>
-            <p><a href="{% url 'app:reviews' %}" class="text-white text-decoration-underline">Отзывы</a> | <a href="{% url 'shop:contacts' %}" class="text-white text-decoration-underline">Контакты</a></p>
+            <p><a href="{% url 'app:reviews' %}" class="text-white text-decoration-underline">Отзывы</a> | <a href="{% url 'app:contacts' %}" class="text-white text-decoration-underline">Контакты</a></p>
         </div>
     </footer>
 </body>

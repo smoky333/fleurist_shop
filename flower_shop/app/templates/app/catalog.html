@@ -19,11 +19,11 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ product.name }}</h5>
                         <p class="card-text">{{ product.description|truncatewords:20 }}</p>
-                        <p class="card-text"><strong>Цена: </strong>{{ product.price }} ₽</p>
+                        <p class="card-text"><strong>Цена: </strong>{{ product.price }} €</p>
                     </div>
                     <div class="card-footer">
-                        <a href="{% url 'shop:product_detail' product.pk %}" class="btn btn-primary btn-sm">Подробнее</a>
-                        <form method="post" action="{% url 'shop:add_to_cart' product.id %}" style="display: inline;">
+                        <a href="{% url 'app:product_detail' product.pk %}" class="btn btn-primary btn-sm">Подробнее</a>
+                        <form method="post" action="{% url 'app:add_to_cart' product.id %}" style="display: inline;">
                             {% csrf_token %}
                             <button type="submit" class="btn btn-success btn-sm">Добавить в Корзину</button>
                         </form>

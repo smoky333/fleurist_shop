@@ -98,17 +98,12 @@ def product_detail(request, pk):
     })
 
 
+@login_required
 def add_to_cart(request, product_id):
-    if not request.user.is_authenticated:
-        messages.error(request, "Войдите, чтобы добавить товар в корзину.")
-        return redirect(f"{reverse('app:login')}?next={request.path}")
-
     product = get_object_or_404(Product, id=product_id, available=True)
 
-    try:
-        product_stock = int(product.stock)
-    except ValueError:
-        messages.error(request, f"Ошибка: количество товара '{product.name}' некорректно.")
+    if product.stock <= 0:
+        messages.error(request, f"Товар '{product.name}' закончился на складе.")
         return redirect('app:catalog')
 
     cart_item, created = CartItem.objects.get_or_create(
@@ -117,24 +112,37 @@ def add_to_cart(request, product_id):
         defaults={'price': product.price, 'quantity': 0}
     )
 
-    if product_stock >= cart_item.quantity + 1:
-        cart_item.quantity += 1
-        cart_item.save()
-        messages.success(request, f'Товар "{product.name}" добавлен в корзину.')
+    if created:
+        cart_item.quantity = 1
     else:
-        messages.warning(request, f'Недостаточно товара "{product.name}" на складе.')
+        if cart_item.quantity < product.stock:
+            cart_item.quantity += 1
+        else:
+            messages.warning(request, f"На складе недостаточно товара '{product.name}'.")
+            return redirect('app:cart')
 
+    cart_item.save()
+    messages.success(request, f"Товар '{product.name}' добавлен в корзину.")
     return redirect('app:cart')
+
 
 
 @login_required
 def cart_view(request):
+    """
+    Отображает товары в корзине пользователя.
+    """
+    # Получаем все товары пользователя в корзине
     cart_items = CartItem.objects.filter(user=request.user).select_related('product')
+
+    # Вычисляем общую стоимость товаров в корзине
     total_price = sum(item.subtotal() for item in cart_items)
-    return render(request, 'shop/add_product.html', {
+
+    return render(request, 'app/cart.html', {
         'cart_items': cart_items,
-        'total_price': total_price
+        'total_price': total_price,
     })
+
 
 
 from aiogram import types
@@ -523,3 +531,9 @@ def order_status(request, order_id):
     return render(request, 'shop/order_status.html', {'order': order})
 
 
+@login_required
+def remove_from_cart(request, cart_item_id):
+    cart_item = get_object_or_404(CartItem, id=cart_item_id, user=request.user)
+    cart_item.delete()
+    messages.success(request, f'Товар “{cart_item.product.name}” удалён из корзины.')
+    return redirect('app:cart')

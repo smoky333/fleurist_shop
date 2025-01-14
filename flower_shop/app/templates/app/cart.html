@@ -1,54 +1,45 @@
 {% extends "app/base.html" %}
-{% load static %}
 
-{% block title %}
-Корзина
-{% endblock %}
+{% block title %}Корзина{% endblock %}
 
 {% block content %}
 <div class="container mt-5">
-    <h1 class="text-center">Корзина</h1>
+    <h2 class="mb-4">Корзина</h2>
+
     {% if cart_items %}
-        <table class="table table-bordered mt-4">
+        <table class="table">
             <thead>
                 <tr>
                     <th>Товар</th>
+                    <th>Цена</th>
                     <th>Количество</th>
-                    <th>Цена за единицу</th>
                     <th>Итого</th>
-                    <th>Действия</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 {% for item in cart_items %}
-                    <tr>
-                        <td>
-                            {{ item.product.name }}<br>
-                            {% if item.product.image %}
-                                <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" style="max-width: 100px;">
-                            {% else %}
-                                <img src="{% static 'images/placeholder.jpg' %}" alt="Нет изображения" style="max-width: 100px;">
-                            {% endif %}
-                        </td>
-                        <td>{{ item.quantity }}</td>
-                        <td>{{ item.price }} ₽</td>
-                        <td>{{ item.subtotal }} ₽</td>
-                        <td>
-                            <form action="{% url 'shop:remove_from_cart' item.id %}" method="post">
-                                {% csrf_token %}
-                                <button type="submit" class="btn btn-danger btn-sm">Удалить</button>
-                            </form>
-                        </td>
-                    </tr>
+                <tr>
+                    <td>{{ item.product.name }}</td>
+                    <td>{{ item.price }} €</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.subtotal|floatformat:2 }} €</td>
+                    <td>
+                        <form method="post" action="{% url 'app:remove_from_cart' item.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger btn-sm">Удалить</button>
+                        </form>
+                    </td>
+                </tr>
                 {% endfor %}
             </tbody>
         </table>
-        <h3 class="text-end">Общая стоимость: {{ total_price }} ₽</h3>
         <div class="text-end">
-            <a href="{% url 'shop:checkout' %}" class="btn btn-success btn-lg">Оформить заказ</a>
+            <h4>Общая стоимость: {{ total_price|floatformat:2 }} €</h4>
+            <a href="{% url 'app:checkout' %}" class="btn btn-primary">Оформить заказ</a>
         </div>
     {% else %}
-        <p class="text-muted text-center mt-4">Ваша корзина пуста. <a href="{% url 'shop:catalog' %}">Перейти в каталог</a></p>
+        <p>Ваша корзина пуста.</p>
     {% endif %}
 </div>
 {% endblock %}

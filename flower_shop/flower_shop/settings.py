@@ -128,3 +128,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 BOT_TOKEN = "7871114248:AAHpOr0l7R53OPjhYmvrXFa4xuUdnlsE7rQ"
 
+MEDIA_URL = '/media/'  # URL для доступа к медиафайлам
+MEDIA_ROOT = BASE_DIR / 'media'  # Папка для хранения загруженных файлов
+
+
