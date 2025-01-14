@@ -14,7 +14,7 @@
                     <p>Сумма: {{ order.total_price }} ₽</p>
                     <p>Статус: {{ order.status }}</p>
                     <!-- Кнопка для повторного оформления заказа -->
-                    <a href="{% url 'shop:repeat_order' order.id %}" class="btn btn-primary">
+                    <a href="{% url 'app:repeat_order' order.id %}" class="btn btn-primary">
                         Повторить заказ
                     </a>
                 </div>

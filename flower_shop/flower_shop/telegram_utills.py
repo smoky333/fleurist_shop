@@ -4,6 +4,7 @@ import threading
 import logging
 from aiogram import Bot
 
+
 logger = logging.getLogger(__name__)
 
 # Настройка токена и chat_id

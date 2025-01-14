@@ -1,5 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.timezone import now
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
+
+
+
 
 
 class Product(models.Model):
@@ -49,6 +56,8 @@ class Order(models.Model):
     def __str__(self):
         return f"Заказ #{self.id} от {self.user.username} (Статус: {self.get_status_display()})"
 
+
+
     def get_status_display(self):
         return dict(self.STATUS_CHOICES).get(self.status, "Неизвестно")
 
@@ -63,13 +72,17 @@ class OrderItem(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
 
 
+
+
 class Review(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    rating = models.PositiveIntegerField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="reviews")
+    text = models.TextField(default='Нет комментария')
+    rating = models.PositiveSmallIntegerField(default=1)  # Оценка: от 1 до 5
     comment = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 
-
+    def __str__(self):
+        return f"Review by {self.user.username} - Rating: {self.rating}"
 
 
 

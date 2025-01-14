@@ -11,4 +11,10 @@ class ProductAdmin(admin.ModelAdmin):
 class OrderAdmin(admin.ModelAdmin):
     list_display = ('id', 'user', 'status', 'created_at', 'total_price')
     list_filter = ('status', 'created_at')
-    search_fields = ('user__username', 'delivery_address')
+    search_fields = ('user__username', 'delivery_address', 'id')
+    list_editable = ('status',)
+
+
+@admin.register(Review)
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = ('user', 'rating', 'comment', 'created_at')

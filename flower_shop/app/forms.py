@@ -39,7 +39,18 @@ class OrderForm(forms.ModelForm):
         fields = ['delivery_address', 'phone_number', 'delivery_time', 'delivery_date']
 
 
+
+
+
 class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
-        fields = ['rating', 'comment']  # пример полей
+        fields = ['text', 'rating']
+        widgets = {
+            'text': forms.Textarea(attrs={'class': 'form-control', 'rows': 4}),
+            'rating': forms.Select(choices=[(i, i) for i in range(1, 6)], attrs={'class': 'form-control'}),
+        }
+        labels = {
+            'text': 'Ваш отзыв',
+            'rating': 'Оценка',
+        }

@@ -13,6 +13,9 @@ from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 
+from django.utils.timezone import now, timedelta
+
+
 from django.contrib.auth.models import User
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.admin.views.decorators import staff_member_required
@@ -393,13 +396,10 @@ def logout_success(request):
     return render(request, 'app/logout_success.html')
 
 
+@login_required
 def leave_review(request):
     reviews = Review.objects.all().order_by('-created_at')
-
     if request.method == 'POST':
-        if not request.user.is_authenticated:
-            messages.error(request, "Только авторизованные пользователи могут оставлять отзывы.")
-            return redirect('app:reviews')
         form = ReviewForm(request.POST)
         if form.is_valid():
             review = form.save(commit=False)
