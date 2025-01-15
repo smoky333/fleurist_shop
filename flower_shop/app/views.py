@@ -15,6 +15,11 @@ from django.http import JsonResponse
 
 from django.utils.timezone import now, timedelta
 
+from aiogram import types
+from aiogram.filters import Command
+from aiogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
+from asgiref.sync import sync_to_async
+
 
 from django.contrib.auth.models import User
 from django.contrib.auth.tokens import default_token_generator
@@ -148,10 +153,6 @@ def cart_view(request):
 
 
 
-from aiogram import types
-from aiogram.filters import Command
-from aiogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
-from asgiref.sync import sync_to_async
 
 # Предполагаем, что переменная ADMIN_CHAT_ID определена, например:
 ADMIN_CHAT_ID = "5285694652"
@@ -500,10 +501,7 @@ def send_order_to_bot(request):
 
 @login_required
 def repeat_order(request, order_id):
-    """
-    Копирует товары из выбранного заказа в корзину текущего пользователя.
-    """
-    # Получаем оригинальный заказ; убедитесь, что пользователь — владелец заказа
+
     original_order = get_object_or_404(Order, id=order_id, user=request.user)
 
     # Копируем каждый товар из оригинального заказа в корзину

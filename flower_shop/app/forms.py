@@ -32,7 +32,14 @@ class OrderForm(forms.ModelForm):
         widget=forms.DateInput(attrs={'type': 'date'}),
         input_formats=['%Y-%m-%d'],
         required=True
+
     )
+
+    data = {
+        "delivery_address": "Тестовый адрес",
+        "delivery_date": "2025-01-01",
+        "phone_number": "1234567890"
+    }
 
     class Meta:
         model = Order
