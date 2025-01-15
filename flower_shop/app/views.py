@@ -1,47 +1,36 @@
-import os
+
 import json
 import logging
 import asyncio
 import threading
+from aiogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
+from aiogram import Bot
+from aiogram.types import FSInputFile
 
+from asgiref.sync import sync_to_async
 from django.conf import settings
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 
-from django.utils.timezone import now, timedelta
 
-from aiogram import types
-from aiogram.filters import Command
-from aiogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
-from asgiref.sync import sync_to_async
 
 
 from django.contrib.auth.models import User
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.admin.views.decorators import staff_member_required
 
-from aiogram import Bot
-from aiogram.types import FSInputFile
-
-# Импорт форм и моделей
 
 from .forms import RegistrationForm, OrderForm, ReviewForm
 from .models import Product, CartItem, Order, OrderItem, Review
 
 logger = logging.getLogger(__name__)
 
-# -------------------------------------------
-# 1. Получаем токен бота из settings.py
-# -------------------------------------------
 BOT_TOKEN = getattr(settings, "BOT_TOKEN")
 if not BOT_TOKEN or ":" not in BOT_TOKEN:
-    # Если токен пустой или явно не соответствует формату,
-    # вызываем исключение, чтобы не получить TokenValidationError
     raise ValueError("BOT_TOKEN is invalid or missing in settings.py!")
 
 bot = Bot(token=BOT_TOKEN)
@@ -59,16 +48,12 @@ thread = threading.Thread(target=_start_loop, args=(loop,), daemon=True)
 thread.start()
 
 def run_in_loop(coro):
-    """
-    Запускает корутину в уже работающем (глобальном) event loop.
-    Возвращает объект Future (при необходимости можно получить результат).
-    """
+
     return asyncio.run_coroutine_threadsafe(coro, loop)
 
 async def send_order_to_telegram_async(order):
-    """Асинхронная функция для отправки информации о заказе в Telegram."""
     try:
-        # Замените на нужный chat_id (например, чат администратора)
+
         chat_id = "5285694652"
         caption = (
             f"🎉 *Новый заказ!*\n\n"
@@ -137,9 +122,6 @@ def add_to_cart(request, product_id):
 
 @login_required
 def cart_view(request):
-    """
-    Отображает товары в корзине пользователя.
-    """
     # Получаем все товары пользователя в корзине
     cart_items = CartItem.objects.filter(user=request.user).select_related('product')
 
@@ -151,10 +133,6 @@ def cart_view(request):
         'total_price': total_price,
     })
 
-
-
-
-# Предполагаем, что переменная ADMIN_CHAT_ID определена, например:
 ADMIN_CHAT_ID = "5285694652"
 
 # Функция для отправки сообщения в Telegram
@@ -504,7 +482,6 @@ def repeat_order(request, order_id):
 
     original_order = get_object_or_404(Order, id=order_id, user=request.user)
 
-    # Копируем каждый товар из оригинального заказа в корзину
     for item in original_order.order_items.all():
         # Если товар уже есть в корзине, увеличиваем количество,
         # иначе создаём новую запись
@@ -535,3 +512,4 @@ def remove_from_cart(request, cart_item_id):
     cart_item.delete()
     messages.success(request, f'Товар “{cart_item.product.name}” удалён из корзины.')
     return redirect('app:cart')
+

@@ -14,7 +14,7 @@
         </div>
         <div class="card-body">
             <p><strong>Всего заказов:</strong> {{ total_orders }}</p>
-            <p><strong>Общая выручка:</strong> {{ total_revenue }} ₽</p>
+            <p><strong>Общая выручка:</strong> {{ total_revenue }} €</p>
         </div>
     </div>
 
@@ -24,7 +24,7 @@
         </div>
         <div class="card-body">
             <p><strong>Заказов сегодня:</strong> {{ total_orders_today }}</p>
-            <p><strong>Выручка за сегодня:</strong> {{ total_revenue_today }} ₽</p>
+            <p><strong>Выручка за сегодня:</strong> {{ total_revenue_today }} €</p>
         </div>
     </div>
 
@@ -36,7 +36,7 @@
             {% for order in orders_today %}
                 <li class="list-group-item">
                     <p><strong>Заказ #{{ order.id }}</strong> от {{ order.created_at|date:"d.m.Y H:i" }}</p>
-                    <p><strong>Сумма:</strong> {{ order.total_price }} ₽</p>
+                    <p><strong>Сумма:</strong> {{ order.total_price }} €</p>
                     <p><strong>Статус:</strong> {{ order.get_status_display }}</p>
                 </li>
             {% empty %}

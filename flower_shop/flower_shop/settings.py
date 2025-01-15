@@ -10,6 +10,9 @@ from decouple import config
 # Build paths inside the project
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+TEST_DISCOVER_PATTERN = "test_*.py"
+
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure--qnp7uhbn%r3ykhw^n96_ck&&yglf$5lq**4gt5$551n_u9wx_'
 

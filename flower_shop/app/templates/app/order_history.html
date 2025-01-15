@@ -11,7 +11,7 @@
             {% for order in orders %}
                 <div class="list-group-item">
                     <h5>Заказ №{{ order.id }} от {{ order.created_at|date:"d.m.Y H:i" }}</h5>
-                    <p>Сумма: {{ order.total_price }} ₽</p>
+                    <p>Сумма: {{ order.total_price }} €</p>
                     <p>Статус: {{ order.status }}</p>
                     <!-- Кнопка для повторного оформления заказа -->
                     <a href="{% url 'app:repeat_order' order.id %}" class="btn btn-primary">
