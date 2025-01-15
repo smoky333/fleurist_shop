@@ -21,7 +21,3 @@
 - **Testing:** Django TestCase, unittest, and coverage
 - **Bot Integration:** aiogram
 
-## Project Structure
-
-
- 

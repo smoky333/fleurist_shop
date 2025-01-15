@@ -7,7 +7,7 @@ body {
     padding: 0;
 }
 
-/* Стили для навигационной панели (при необходимости можно переопределить стандартные стили Bootstrap) */
+/* Стили для навигационной панели */
 .navbar {
     margin-bottom: 20px;
 }
@@ -15,8 +15,8 @@ body {
 /* Стили для карусели */
 .carousel-item img {
     width: 100%;           /* изображение занимает всю ширину контейнера */
-    height: 300px;         /* фиксированная высота для карусели – можно изменить по необходимости */
-    object-fit: cover;     /* изображение масштабируется и обрезается по необходимости, чтобы заполнить контейнер */
+    height: 300px;         /* фиксированная высота для карусели */
+    object-fit: cover;     /* изображение масштабируется и обрезается по необходимости */
 }
 
 /* Дополнительное оформление для карусели */
@@ -36,15 +36,82 @@ footer {
     margin-top: 40px;
 }
 
-/* Стили для форм и кнопок (если требуется дополнительное оформление) */
+/* Стили для форм */
 form {
     background: #fff;
     padding: 20px;
     border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.btn {
-    /* можно задать общие стили для кнопок, если нужно */
+form input, form select, form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
     border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Стили для кнопок */
+.btn {
+    border-radius: 4px;
+    padding: 5px 10px;
+    font-size: 0.9rem;
+}
+
+/* Стили для карточек товаров */
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Расстояние между карточками */
+    justify-content: center; /* Центровка карточек */
+}
+
+.card {
+    width: 200px; /* Уменьшаем ширину карточек */
+    margin: 10px; /* Добавляем отступы */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Тонкая тень */
+    border-radius: 5px; /* Скругляем углы */
+    overflow: hidden; /* Скрываем содержимое за пределами */
+    background: #fff; /* Белый фон */
+}
+
+.card-img-top {
+    height: 120px; /* Уменьшаем высоту изображения */
+    object-fit: cover; /* Делаем изображение аккуратным */
+}
+
+.card-title {
+    font-size: 1rem; /* Уменьшаем размер заголовка */
+    font-weight: bold;
+}
+
+.card-text {
+    font-size: 0.8rem; /* Уменьшаем размер текста */
+    color: #6c757d; /* Светло-серый цвет текста */
+}
+
+.card-footer {
+    background-color: #f8f9fa; /* Светло-серый фон для футера карточки */
+    border-top: 1px solid #ddd; /* Тонкая граница сверху */
+    padding: 5px; /* Уменьшаем внутренние отступы */
+    text-align: center;
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+    .card {
+        width: 150px; /* Ещё меньше для планшетов */
+    }
+}
+
+@media (max-width: 480px) {
+    .card {
+        width: 120px; /* Минимальный размер для телефонов */
+    }
+
+    .card-img-top {
+        height: 100px; /* Уменьшенная высота изображения для телефонов */
+    }
 }

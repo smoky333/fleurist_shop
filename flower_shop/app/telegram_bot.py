@@ -86,7 +86,7 @@ async def order_status_command(message: Message):
         text = (
             f"🛒 Заказ №{order.id}\n"
             f"👤 Пользователь: {order.user.username}\n"
-            f"💰 Сумма: {order.total_price} ₽\n"
+            f"💰 Сумма: {order.total_price} €\n"
             f"📍 Адрес: {order.delivery_address}\n"
             f"📊 Статус: {status_map.get(order.status, 'Неизвестно')}"
         )
@@ -114,9 +114,9 @@ async def analytics_command(message: Message):
 
     response = (
         f"📊 Аналитика:\n"
-        f"💰 Общий доход: {total_revenue} ₽\n"
+        f"💰 Общий доход: {total_revenue} €\n"
         f"🛍 Всего заказов: {total_orders}\n"
-        f"📅 Сегодня доход: {total_revenue_today} ₽\n"
+        f"📅 Сегодня доход: {total_revenue_today} €\n"
         f"📦 Сегодня заказов: {total_orders_today}\n"
     )
     await message.answer(response)
@@ -164,12 +164,12 @@ async def send_order(chat_id: int, bouquet_name: str, price: float, delivery_dat
             await bot.send_photo(
                 chat_id=chat_id,
                 photo=photo,
-                caption=f"🎉 Новый заказ:\n💐 {bouquet_name}\n💰 {price} ₽\n📅 {delivery_date}",
+                caption=f"🎉 Новый заказ:\n💐 {bouquet_name}\n💰 {price} €\n📅 {delivery_date}",
             )
         else:
             await bot.send_message(
                 chat_id=chat_id,
-                text=f"🎉 Новый заказ:\n💐 {bouquet_name}\n💰 {price} ₽\n📅 {delivery_date}",
+                text=f"🎉 Новый заказ:\n💐 {bouquet_name}\n💰 {price} €\n📅 {delivery_date}",
             )
     except Exception as e:
         logger.error(f"Ошибка отправки заказа: {e}")
