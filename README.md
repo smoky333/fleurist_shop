@@ -74,7 +74,7 @@ docker-compose up --build -d
 ## 📫 Contact & Contributions
 Contributions are welcome! Feel free to fork this repository and submit pull requests.
 
-📩 **Contact**: [@YourTelegramUsername](#) | [yourwebsite.com](#)
+📩 **Contact**: [@R0nats](#) | [https://ronatcode.pythonanywhere.com/](#)
 
 ---
 💐 *Fleurist Shop – Bringing fresh flowers to your doorstep!*
